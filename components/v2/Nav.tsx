@@ -29,6 +29,7 @@ export function Nav() {
     { name: "Služby", href: "#nastroje" },
     { name: "Reference", href: "#reference" },
     { name: "O nás", href: "#o-nas" },
+    { name: "Nacenění webu", href: "/naceneni-webu/", external: true },
   ]
   const go = (href: string, external?: boolean) => {
     setOpen(false)

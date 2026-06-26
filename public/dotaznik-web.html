@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dotazník – web | ECC Digital</title>
+<style>
+  :root{
+    --accent:#f97316; --accent-soft:#fff3ea; --accent-ink:#c2410c;
+    --ink:#0f172a; --muted:#475569; --line:#e2e8f0;
+    --bg:#f8fafc; --card:#ffffff; --radius:14px; --ok:#16a34a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:800px;margin:0 auto;padding:28px 18px 96px}
+  .brandbar{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+  .brandbar .logo{font-weight:700;letter-spacing:.5px;font-size:18px}
+  .brandbar .logo b{color:var(--accent)}
+  .brandbar .tag{margin-left:auto;font-size:12px;color:var(--muted)}
+  .hero{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 26px 22px;margin-bottom:20px}
+  .hero h1{margin:0 0 8px;font-size:24px}
+  .hero p{margin:0;color:var(--muted);font-size:15px}
+  .hero .kicker{display:inline-block;font-size:12px;font-weight:600;color:var(--accent-ink);background:var(--accent-soft);padding:4px 10px;border-radius:999px;margin-bottom:12px}
+  .section{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px}
+  .section h2{margin:0 0 4px;font-size:17px;display:flex;align-items:center;gap:9px}
+  .section h2 .n{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:7px;background:var(--accent-soft);color:var(--accent-ink);font-size:13px;font-weight:700;flex:none}
+  .section > .desc{margin:0 0 16px;color:var(--muted);font-size:13.5px}
+  .field{margin:16px 0 0}
+  .field:first-of-type{margin-top:4px}
+  .field > .q{display:block;font-weight:600;font-size:14px;margin-bottom:7px}
+  .field .sub{font-weight:400;color:var(--muted);font-size:12.5px}
+  input[type=text],input[type=email],input[type=tel],input[type=url],input[type=date],input[type=number],textarea,select{
+    width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font:inherit;color:var(--ink);background:#fff;transition:border-color .15s,box-shadow .15s}
+  textarea{min-height:84px;resize:vertical}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.grid2{grid-template-columns:1fr}}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opts.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+  .opt{display:flex;align-items:center;gap:9px;padding:10px 13px;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:14px;background:#fff;transition:.12s;user-select:none}
+  .opt:hover{border-color:#c5ccdb;background:#fafbff}
+  .opt input{accent-color:var(--accent);width:17px;height:17px;flex:none;margin:0}
+  .opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+  .opt span small{display:block;color:var(--muted);font-size:11.5px;font-weight:400;line-height:1.3}
+  .repeat{display:grid;grid-template-columns:1fr 1.2fr;gap:10px;margin-bottom:10px}
+  @media(max-width:620px){.repeat{grid-template-columns:1fr}}
+  .actions{position:sticky;bottom:0;margin-top:24px;background:linear-gradient(180deg,rgba(246,247,251,0),var(--bg) 38%);padding-top:18px}
+  .actions .inner{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .btn{appearance:none;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-weight:600;padding:12px 20px;border-radius:10px;cursor:pointer;transition:.12s}
+  .btn:hover{border-color:#c5ccdb}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{background:#ea6a12}
+  .actions .hint{font-size:12.5px;color:var(--muted);margin-left:auto}
+  .done{display:none;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--radius);padding:22px 24px;margin-bottom:16px}
+  .done h2{margin:0 0 6px;color:var(--ok);font-size:18px}
+  .done p{margin:0 0 14px;color:#15803d;font-size:14px}
+  .done .row{display:flex;gap:10px;flex-wrap:wrap}
+  .req{color:#dc2626}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:26px}
+  @media print{.actions,.brandbar .tag{display:none}.section,.hero{break-inside:avoid;border-color:#ccc}body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <span class="logo"><b>ECC</b> Digital</span>
+    <span class="tag">Vstupní dotazník</span>
+  </div>
+
+  <div class="hero">
+    <span class="kicker">Tvorba webu</span>
+    <h1>Pojďme připravit váš web</h1>
+    <p>Čím víc se dozvíme teď, tím přesněji web navrhneme – designem i rozsahem. Vyplňte, co dává smysl; technické detaily klidně necháte na nás a doladíme je na schůzce. Zabere ~15 minut.</p>
+  </div>
+
+  <div class="done" id="done">
+    <h2 id="done-title">Děkujeme, odesláno!</h2>
+    <p id="done-msg">Vaše odpovědi jsme přijali. Ozveme se s nacením a předpokládaným termínem co nejdříve.</p>
+    <div class="row">
+      <button type="button" class="btn primary" onclick="download_()">Stáhnout kopii (.txt)</button>
+      <button type="button" class="btn" onclick="copy_()">Zkopírovat do schránky</button>
+      <button type="button" class="btn" onclick="window.print()">Uložit jako PDF</button>
+      <button type="button" class="btn" onclick="reopen_()">Zpět k úpravám</button>
+    </div>
+  </div>
+
+  <form id="form">
+
+    <div class="section">
+      <h2><span class="n">1</span> Kontaktní a fakturační údaje</h2>
+      <div class="grid2">
+        <div class="field" data-label="Název firmy / IČO"><label class="q">Název firmy / IČO <span class="req">*</span></label><input type="text" name="firma" required></div>
+        <div class="field" data-label="Kontaktní osoba"><label class="q">Kontaktní osoba <span class="req">*</span></label><input type="text" name="osoba" required></div>
+        <div class="field" data-label="E-mail"><label class="q">E-mail <span class="req">*</span></label><input type="email" name="email" required></div>
+        <div class="field" data-label="Telefon"><label class="q">Telefon</label><input type="tel" name="tel"></div>
+      </div>
+      <div class="field" data-label="Stávající web"><label class="q">Stávající web <span class="sub">(děláme redesign, nebo web od nuly?)</span></label><input type="url" name="web" placeholder="https://"></div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">2</span> Cíle webu</h2>
+      <p class="desc">Co má web hlavně přinášet – to určuje celý jeho návrh i cenu. Čím konkrétnější budete, tím přesnější nabídku dostanete.</p>
+      <div class="field" data-label="Čím se zabýváte / co prodáváte"><label class="q">Čím se zabýváte a co prodáváte? <span class="req">*</span></label><textarea name="sortiment" required placeholder="Stručně popište svůj sortiment, hlavní produkty nebo služby."></textarea></div>
+      <div class="field" data-label="Důvod nového webu"><label class="q">Co vás vede k novému webu? Co dnes nefunguje?</label><textarea name="duvod" placeholder="Např. starý web není na mobilu, nepřináší poptávky, chceme začít prodávat online…"></textarea></div>
+      <div class="field" data-label="Hlavní cíl webu">
+        <label class="q">Co je hlavním cílem webu? <span class="sub">(vyberte i více)</span></label>
+        <div class="opts cols">
+          <label class="opt"><input type="checkbox" value="Prodávat online (e-shop)"><span>Prodávat online</span></label>
+          <label class="opt"><input type="checkbox" value="Generovat poptávky / kontakty"><span>Generovat poptávky</span></label>
+          <label class="opt"><input type="checkbox" value="Prezentace / katalog produktů"><span>Prezentace / katalog</span></label>
+          <label class="opt"><input type="checkbox" value="Budování značky a důvěry"><span>Budování značky</span></label>
+          <label class="opt"><input type="checkbox" value="Podpora prodejců / B2B partnerů"><span>Podpora prodejců</span></label>
+          <label class="opt"><input type="checkbox" value="Telefonáty / návštěvy prodejny"><span>Telefonáty / návštěvy</span></label>
+        </div>
+      </div>
+      <div class="field" data-label="Cílová skupina">
+        <label class="q">Kdo jsou návštěvníci webu?</label>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" value="Firmy (B2B)"><span>Firmy (B2B)</span></label>
+          <label class="opt"><input type="checkbox" value="Koncoví zákazníci (B2C)"><span>Koncoví (B2C)</span></label>
+          <label class="opt"><input type="checkbox" value="Řemeslníci / realizační firmy"><span>Řemeslníci</span></label>
+          <label class="opt"><input type="checkbox" value="Architekti / projektanti"><span>Architekti</span></label>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="field" data-label="Region / jazyky"><label class="q">Region a jazykové mutace</label><input type="text" name="region" placeholder="Např. ČR, jen čeština / ČR + SK + EN"></div>
+        <div class="field" data-label="Co je úspěch"><label class="q">Jak poznáte, že web funguje?</label><input type="text" name="uspech" placeholder="Např. 10 poptávek měsíčně"></div>
+      </div>
+      <div class="field" data-label="Priorita projektu">
+        <label class="q">Co je pro vás největší priorita?</label>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="priorita" value="Rychlé spuštění"><span>Rychlé spuštění</span></label>
+          <label class="opt"><input type="radio" name="priorita" value="Co nejnižší cena"><span>Nízká cena</span></label>
+          <label class="opt"><input type="radio" name="priorita" value="Maximální kvalita / výsledek"><span>Kvalita / výsledek</span></label>
+          <label class="opt"><input type="radio" name="priorita" value="Vyvážený poměr cena/výkon"><span>Vyvážený poměr</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">3</span> Konkurence</h2>
+      <p class="desc">Uveďte konkurenty – ať vidíme trh a víme, jak se odlišit. Alespoň jeden je povinný.</p>
+      <div class="field" data-label="Konkurent 1"><label class="q">Konkurent 1 <span class="req">*</span></label><div class="repeat"><input type="text" name="konk1_nazev" placeholder="Název" required><input type="url" name="konk1_web" placeholder="https://"></div></div>
+      <div class="field" data-label="Konkurent 2"><label class="q">Konkurent 2</label><div class="repeat"><input type="text" name="konk2_nazev" placeholder="Název"><input type="url" name="konk2_web" placeholder="https://"></div></div>
+      <div class="field" data-label="Konkurent 3"><label class="q">Konkurent 3</label><div class="repeat"><input type="text" name="konk3_nazev" placeholder="Název"><input type="url" name="konk3_web" placeholder="https://"></div></div>
+      <div class="field" data-label="Co se vám u konkurence líbí / nelíbí"><label class="q">Co se vám na jejich webech líbí a co ne?</label><textarea name="konk_pozn"></textarea></div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">4</span> Grafická inspirace</h2>
+      <p class="desc">Weby, jejichž vzhled/funkce se vám líbí – a krátce proč. Tohle nám nejvíc napoví směr; alespoň dva jsou povinné.</p>
+      <div class="field" data-label="Inspirace 1"><label class="q">Inspirace 1 <span class="req">*</span></label><div class="repeat"><input type="url" name="insp1_url" placeholder="https://" required><input type="text" name="insp1_proc" placeholder="Co se vám líbí?"></div></div>
+      <div class="field" data-label="Inspirace 2"><label class="q">Inspirace 2 <span class="req">*</span></label><div class="repeat"><input type="url" name="insp2_url" placeholder="https://" required><input type="text" name="insp2_proc" placeholder="Co se vám líbí?"></div></div>
+      <div class="field" data-label="Inspirace 3"><label class="q">Inspirace 3</label><div class="repeat"><input type="url" name="insp3_url" placeholder="https://"><input type="text" name="insp3_proc" placeholder="Co se vám líbí?"></div></div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">5</span> Typ a rozsah webu</h2>
+      <div class="field" data-label="Typ webu">
+        <label class="q">Jaký typ webu si představujete?</label>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="typ" value="Jednostránkový (one-page)"><span>One-page</span></label>
+          <label class="opt"><input type="radio" name="typ" value="Vícestránkový web"><span>Vícestránkový</span></label>
+          <label class="opt"><input type="radio" name="typ" value="Katalog produktů (bez nákupu online)"><span>Katalog</span></label>
+          <label class="opt"><input type="radio" name="typ" value="E-shop"><span>E-shop</span></label>
+          <label class="opt"><input type="radio" name="typ" value="Nevím, poraďte"><span>Nevím, poraďte</span></label>
+        </div>
+      </div>
+      <div class="field" data-label="Sekce a stránky">
+        <label class="q">Které sekce / stránky budete chtít?</label>
+        <div class="opts cols">
+          <label class="opt"><input type="checkbox" value="Úvod / homepage"><span>Úvod</span></label>
+          <label class="opt"><input type="checkbox" value="O nás / tým"><span>O nás / tým</span></label>
+          <label class="opt"><input type="checkbox" value="Produkty / katalog"><span>Produkty</span></label>
+          <label class="opt"><input type="checkbox" value="Reference / realizace"><span>Reference</span></label>
+          <label class="opt"><input type="checkbox" value="Galerie"><span>Galerie</span></label>
+          <label class="opt"><input type="checkbox" value="Blog / magazín"><span>Blog</span></label>
+          <label class="opt"><input type="checkbox" value="FAQ / časté dotazy"><span>FAQ</span></label>
+          <label class="opt"><input type="checkbox" value="Ke stažení (PDF, ceníky)"><span>Ke stažení</span></label>
+          <label class="opt"><input type="checkbox" value="Certifikáty / ocenění"><span>Certifikáty</span></label>
+          <label class="opt"><input type="checkbox" value="Kariéra / nábor"><span>Kariéra</span></label>
+          <label class="opt"><input type="checkbox" value="Kontakt + mapa"><span>Kontakt</span></label>
+        </div>
+      </div>
+      <div class="field" data-label="Styl webu">
+        <label class="q">Jaký styl webu preferujete?</label>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="styl" value="Minimalistický / přehledný"><span>Minimalistický</span></label>
+          <label class="opt"><input type="radio" name="styl" value="Bohatý na obsah a vizuály"><span>Bohatý na obsah</span></label>
+          <label class="opt"><input type="radio" name="styl" value="Nevím, poradíme se"><span>Nevím, poraďte</span></label>
+        </div>
+      </div>
+      <div class="field" data-label="Speciální stránky / sekce navíc"><label class="q">Potřebujete specifickou stránku nebo prvek, který tu není?</label><input type="text" name="extra_sekce" placeholder="Např. konfigurátor koupelny, kalkulačka spotřeby, mapa prodejen…"></div>
+      <div class="field" data-label="Odhad počtu stránek"><label class="q">Odhad počtu stránek <span class="sub">(orientačně, nemusí sedět)</span></label><input type="text" name="pocet_stranek" placeholder="Např. 5–8 stránek"></div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">6</span> Katalog produktů</h2>
+      <p class="desc">Pokud budete mít na webu produkty, pomozte nám odhadnout rozsah.</p>
+      <div class="field" data-label="Bude katalog produktů">
+        <label class="q">Bude web obsahovat produktový katalog?</label>
+        <div class="opts"><label class="opt"><input type="radio" name="katalog" value="Ano"><span>Ano</span></label><label class="opt"><input type="radio" name="katalog" value="Ne"><span>Ne</span></label></div>
+      </div>
+      <div class="grid2">
+        <div class="field" data-label="Počet položek">
+          <label class="q">Kolik produktů (přibližně)?</label>
+          <select name="pocet_produktu">
+            <option value="">– vyberte –</option>
+            <option>do 20</option>
+            <option>20–100</option>
+            <option>100–500</option>
+            <option>500–2000</option>
+            <option>2000+</option>
+          </select>
+        </div>
+        <div class="field" data-label="Počet kategorií"><label class="q">Kolik kategorií / typů?</label><input type="text" name="kategorie" placeholder="Např. 6 kategorií"></div>
+      </div>
+      <div class="field" data-label="Kdo dodá data o produktech">
+        <label class="q">Jak dodáte data o produktech?</label>
+        <div class="opts cols">
+          <label class="opt"><input type="checkbox" value="XML / produktový feed"><span>XML feed</span></label>
+          <label class="opt"><input type="checkbox" value="Excel / tabulka"><span>Excel / tabulka</span></label>
+          <label class="opt"><input type="checkbox" value="Máme v systému (Pohoda, sklad…)"><span>Máme v systému</span></label>
+          <label class="opt"><input type="checkbox" value="Naplníme ručně"><span>Naplníme ručně</span></label>
+          <label class="opt"><input type="checkbox" value="Potřebujeme pomoc s naplněním"><span>Pomoc s naplněním</span></label>
+        </div>
+      </div>
+      <div class="field" data-label="Varianty produktů">
+        <label class="q">Mají produkty varianty? <span class="sub">(rozměr, barva, balení…)</span></label>
+        <div class="opts"><label class="opt"><input type="radio" name="varianty" value="Ano"><span>Ano</span></label><label class="opt"><input type="radio" name="varianty" value="Ne"><span>Ne</span></label></div>
+      </div>
+      <div class="field" data-label="Zobrazení cen a dostupnosti"><label class="q">Chcete zobrazovat ceny a skladovou dostupnost?</label><input type="text" name="ceny_zobrazeni" placeholder="Např. ceny ano + sklad, jen „cena na dotaz“, ceny po přihlášení (B2B)…"></div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">7</span> Obsah a obsahový marketing</h2>
+      <div class="field" data-label="Kdo dodá texty">
+        <label class="q">Kdo dodá texty na web?</label>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="texty" value="Texty dodáme my"><span>Dodáme my</span></label>
+          <label class="opt"><input type="radio" name="texty" value="Texty napíše ECC (copywriting)"><span>Napíše ECC</span></label>
+          <label class="opt"><input type="radio" name="texty" value="Kombinace – podklady dodáme, ECC zpracuje"><span>Kombinace</span></label>
+        </div>
+      </div>
+      <div class="field" data-label="Blog / magazín">
+        <label class="q">Chcete blog / magazín?</label>
+        <div class="opts"><label class="opt"><input type="radio" name="blog" value="Ano"><span>Ano</span></label><label class="opt"><input type="radio" name="blog" value="Ne"><span>Ne</span></label><label class="opt"><input type="radio" name="blog" value="Možná později"><span>Možná později</span></label></div>
+      </div>
+      <div class="field" data-label="Obsahový marketing">
+        <label class="q">Chcete kompletní obsahový marketing? <span class="sub">(vyberte, co od nás chcete zajistit)</span></label>
+        <div class="opts cols">
+          <label class="opt"><input type="checkbox" value="Analýza klíčových slov"><span>Analýza klíčových slov</span></label>
+          <label class="opt"><input type="checkbox" value="Návrh témat článků"><span>Návrh témat článků</span></label>
+          <label class="opt"><input type="checkbox" value="Psaní článků (copywriting)"><span>Psaní článků</span></label>
+          <label class="opt"><input type="checkbox" value="Pravidelný publikační plán"><span>Publikační plán</span></label>
+          <label class="opt"><input type="checkbox" value="Distribuce na sociální sítě"><span>Distribuce na sítě</span></label>
+        </div>
+      </div>
+      <div class="field" data-label="Frekvence článků">
+        <label class="q">Kolik článků měsíčně?</label>
+        <select name="frekvence">
+          <option value="">– vyberte –</option>
+          <option>1–2 / měsíc</option>
+          <option>3–4 / měsíc</option>
+          <option>5+ / měsíc</option>
+          <option>Nárazově / dle potřeby</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">8</span> Funkce webu</h2>
+      <div class="field" data-label="Funkce">
+        <div class="opts cols">
+          <label class="opt"><input type="checkbox" value="Cenová kalkulačka"><span>Cenová kalkulačka</span></label>
+          <label class="opt"><input type="checkbox" value="Kalkulačka spotřeby materiálu"><span>Kalkulačka spotřeby materiálu</span></label>
+          <label class="opt"><input type="checkbox" value="Poptávkový / objednávkový formulář"><span>Poptávkový formulář</span></label>
+          <label class="opt"><input type="checkbox" value="Konfigurátor produktu"><span>Konfigurátor</span></label>
+          <label class="opt"><input type="checkbox" value="Filtrování a vyhledávání produktů"><span>Filtrování / hledání</span></label>
+          <label class="opt"><input type="checkbox" value="Online platby"><span>Online platby</span></label>
+          <label class="opt"><input type="checkbox" value="Rezervace konzultace / schůzky"><span>Rezervace schůzky</span></label>
+          <label class="opt"><input type="checkbox" value="Chat / WhatsApp / call-back"><span>Chat / WhatsApp</span></label>
+          <label class="opt"><input type="checkbox" value="AI chatbot / poradce"><span>AI chatbot</span></label>
+          <label class="opt"><input type="checkbox" value="Srovnání produktů"><span>Srovnání produktů</span></label>
+          <label class="opt"><input type="checkbox" value="Recenze / hodnocení"><span>Recenze</span></label>
+          <label class="opt"><input type="checkbox" value="B2B velkoobchodní ceník / přihlášení"><span>B2B ceník</span></label>
+          <label class="opt"><input type="checkbox" value="Vyhledávač prodejen / poboček"><span>Vyhledávač prodejen</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">9</span> Administrace – kolik chcete editovat?</h2>
+      <p class="desc">Z naší zkušenosti zhruba 80 % klientů administraci nakonec vůbec nevyužije a úpravy stejně raději nechá na nás. Ptáme se proto, abychom vám neúčtovali plnou administraci, kterou nevyužijete – a navrhli rozsah, který vám reálně dává smysl. Klidně zvolte „Nevím" a doporučíme.</p>
+      <div class="field" data-label="Míra administrace">
+        <div class="opts cols">
+          <label class="opt"><input type="radio" name="admin" value="Bez administrace – úpravy řeší ECC"><span>Bez administrace<small>úpravy řeší ECC, nejlevnější</small></span></label>
+          <label class="opt"><input type="radio" name="admin" value="Částečná – edituji jen vybrané sekce"><span>Částečná<small>edituji ceny, produkty, blog</small></span></label>
+          <label class="opt"><input type="radio" name="admin" value="Plná – chci editovat vše (CMS)"><span>Plná (CMS)<small>chci editovat vše + školení</small></span></label>
+          <label class="opt"><input type="radio" name="admin" value="Nevím – doporučte"><span>Nevím<small>doporučte nám rozsah</small></span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">10</span> Napojení a integrace</h2>
+      <div class="field" data-label="Integrace">
+        <div class="opts cols">
+          <label class="opt"><input type="checkbox" value="Napojení na CRM"><span>CRM</span></label>
+          <label class="opt"><input type="checkbox" value="Fakturační / skladový systém (Pohoda, Money, ABRA)"><span>Fakturace / sklad</span></label>
+          <label class="opt"><input type="checkbox" value="E-mailing (Ecomail, SmartEmailing, Mailchimp)"><span>E-mailing</span></label>
+          <label class="opt"><input type="checkbox" value="XML / produktový feed"><span>XML feed</span></label>
+          <label class="opt"><input type="checkbox" value="Zbožové srovnávače (Heureka, Zboží.cz)"><span>Heureka / Zboží.cz</span></label>
+          <label class="opt"><input type="checkbox" value="Doprava (PPL, Zásilkovna, DPD)"><span>Doprava</span></label>
+        </div>
+      </div>
+      <div class="field" data-label="Které CRM"><label class="q">Pokud CRM, které? <span class="sub">(Raynet, Pipedrive, HubSpot, vlastní…)</span></label><input type="text" name="crm"></div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">11</span> Analytika a měření</h2>
+      <p class="desc">Co máme založit a nastavit pro měření výkonu webu.</p>
+      <div class="field" data-label="Analytika">
+        <div class="opts cols">
+          <label class="opt"><input type="checkbox" value="Google Tag Manager (GTM)"><span>GTM</span></label>
+          <label class="opt"><input type="checkbox" value="Google Analytics 4 (GA4)"><span>GA4</span></label>
+          <label class="opt"><input type="checkbox" value="Google Search Console"><span>Search Console</span></label>
+          <label class="opt"><input type="checkbox" value="Měření konverzí (formuláře, kliky na telefon)"><span>Měření konverzí</span></label>
+          <label class="opt"><input type="checkbox" value="Cookie lišta + consent mode"><span>Cookie consent</span></label>
+          <label class="opt"><input type="checkbox" value="Microsoft Clarity / heatmapy"><span>Heatmapy</span></label>
+          <label class="opt"><input type="checkbox" value="Meta Pixel"><span>Meta Pixel</span></label>
+          <label class="opt"><input type="checkbox" value="Sklik měření"><span>Sklik měření</span></label>
+          <label class="opt"><input type="checkbox" value="Looker Studio report / dashboard"><span>Looker Studio report</span></label>
+          <label class="opt"><input type="checkbox" value="Call tracking (měření hovorů)"><span>Call tracking</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">12</span> Firemní zápisy a viditelnost</h2>
+      <div class="field" data-label="Firemní zápisy">
+        <div class="opts cols">
+          <label class="opt"><input type="checkbox" value="Google firemní profil"><span>Google profil</span></label>
+          <label class="opt"><input type="checkbox" value="Firmy.cz / Seznam"><span>Firmy.cz</span></label>
+          <label class="opt"><input type="checkbox" value="Mapy.cz"><span>Mapy.cz</span></label>
+          <label class="opt"><input type="checkbox" value="Oborové katalogy"><span>Oborové katalogy</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">13</span> Reklama a marketing</h2>
+      <div class="field" data-label="Reklama">
+        <div class="opts cols">
+          <label class="opt"><input type="checkbox" value="Google Ads"><span>Google Ads</span></label>
+          <label class="opt"><input type="checkbox" value="Sklik"><span>Sklik</span></label>
+          <label class="opt"><input type="checkbox" value="Meta Ads (Facebook/Instagram)"><span>Meta Ads</span></label>
+          <label class="opt"><input type="checkbox" value="YouTube / video reklama"><span>YouTube</span></label>
+          <label class="opt"><input type="checkbox" value="Průběžná správa + měsíční reporting"><span>Správa + reporting</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">14</span> Právní a provozní</h2>
+      <div class="field" data-label="Právní">
+        <div class="opts cols">
+          <label class="opt"><input type="checkbox" value="GDPR / zpracování osobních údajů"><span>GDPR</span></label>
+          <label class="opt"><input type="checkbox" value="Zásady cookies"><span>Cookies</span></label>
+          <label class="opt"><input type="checkbox" value="Obchodní podmínky (e-shop)"><span>Obchodní podmínky</span></label>
+          <label class="opt"><input type="checkbox" value="SEO správa / obsahový marketing"><span>SEO správa</span></label>
+          <label class="opt"><input type="checkbox" value="Servisní balíček / aktualizace"><span>Servisní balíček</span></label>
+          <label class="opt"><input type="checkbox" value="Školení + dokumentace"><span>Školení</span></label>
+          <label class="opt"><input type="checkbox" value="A/B testování / optimalizace konverzí"><span>A/B testy</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">15</span> Termín a rozpočet</h2>
+      <div class="grid2">
+        <div class="field" data-label="Požadovaný termín"><label class="q">Do kdy web potřebujete?</label><input type="text" name="termin" placeholder="Např. do konce Q3, ASAP, není spěch…"></div>
+        <div class="field" data-label="Orientační rozpočet">
+          <label class="q">Orientační rozpočet na web</label>
+          <select name="rozpocet">
+            <option value="">– vyberte –</option>
+            <option>do 50 000 Kč</option>
+            <option>50–100 000 Kč</option>
+            <option>100–250 000 Kč</option>
+            <option>250 000 Kč+</option>
+            <option>Zatím nevím / poraďte</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><span class="n">16</span> Poznámky</h2>
+      <div class="field" data-label="Poznámky"><textarea name="poznamky" placeholder="Cokoliv dalšího, co bychom měli vědět."></textarea></div>
+    </div>
+
+    <div class="actions">
+      <div class="inner">
+        <button type="submit" class="btn primary">Odeslat dotazník</button>
+        <button type="button" class="btn" onclick="window.print()">Uložit jako PDF</button>
+        <span class="hint">Údaje zůstávají u vás, dokud je neodešlete.</span>
+      </div>
+    </div>
+
+  </form>
+
+  <footer>ECC Digital · dotazník pro tvorbu webu</footer>
+</div>
+
+<script>
+  var CONFIG = { endpoint:"https://ecc-dotazniky.vercel.app/api/poptavka", email:"admin@eccdigital.cz", nazev:"Web – nacenění" };
+  function collect(){
+    var out=[];
+    document.querySelectorAll('.section').forEach(function(sec){
+      var title=sec.querySelector('h2').textContent.replace(/^\s*\d+\s*/,'').trim();
+      var items=[];
+      sec.querySelectorAll('.field').forEach(function(f){
+        var label=f.getAttribute('data-label')||'';
+        var boxes=f.querySelectorAll('input[type=checkbox],input[type=radio]');
+        if(boxes.length){
+          var sel=[];
+          boxes.forEach(function(b){ if(b.checked){ var s=b.closest('label').querySelector('span'); sel.push(s?(s.childNodes[0].textContent.trim()):b.value); }});
+          if(sel.length) items.push([label, sel.join(', ')]);
+        } else {
+          var vals=[];
+          f.querySelectorAll('input,textarea,select').forEach(function(i){ if(i.value && i.value.trim()) vals.push(i.value.trim()); });
+          if(vals.length) items.push([label, vals.join(' — ')]);
+        }
+      });
+      if(items.length) out.push([title, items]);
+    });
+    return out;
+  }
+  function asText(){
+    var d=collect(), lines=['DOTAZNÍK – TVORBA WEBU (ECC Digital)','====================================',''];
+    d.forEach(function(s){
+      lines.push('## '+s[0]);
+      s[1].forEach(function(it){ lines.push('• '+it[0]+': '+it[1]); });
+      lines.push('');
+    });
+    return lines.join('\n');
+  }
+  function download_(){
+    var blob=new Blob([asText()],{type:'text/plain;charset=utf-8'});
+    var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download='dotaznik-web.txt'; a.click();
+  }
+  function copy_(){ navigator.clipboard.writeText(asText()).then(function(){ alert('Zkopírováno do schránky.'); }); }
+  function reopen_(){ document.getElementById('done').style.display='none'; document.getElementById('form').style.display='block'; window.scrollTo(0,0); }
+  document.getElementById('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var payload={ prijemce:CONFIG.email, formular:CONFIG.nazev, text:asText(), odpovedi:{} };
+    collect().forEach(function(s){ s[1].forEach(function(it){ payload.odpovedi[s[0]+' / '+it[0]]=it[1]; }); });
+    document.getElementById('form').style.display='none';
+    document.getElementById('done').style.display='block';
+    window.scrollTo(0,0);
+    if(CONFIG.endpoint){
+      fetch(CONFIG.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+        .then(function(r){ if(!r.ok) throw 0; })
+        .catch(function(){
+          document.getElementById('done-title').textContent='Skoro hotovo';
+          document.getElementById('done-msg').textContent='Automatické odeslání se nepodařilo. Stáhněte si prosím kopii a pošlete ji na '+CONFIG.email+', nebo to za chvíli zkuste znovu.';
+        });
+    }
+  });
+  // Autoresize pro embed v iframe – posílá výšku rodičovské stránce
+  function postH(){ try{ parent.postMessage({eccFormHeight:document.body.scrollHeight},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+  document.addEventListener('input',postH); document.addEventListener('change',postH); document.addEventListener('click',postH);
+  if(window.MutationObserver){ new MutationObserver(postH).observe(document.body,{subtree:true,childList:true,attributes:true}); }
+</script>
+</body>
+</html>
