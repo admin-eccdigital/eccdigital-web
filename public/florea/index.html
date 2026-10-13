@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Florea.cz × ECC Digital — klientský prostor</title>
+<link rel="icon" href="/favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a; --fg: #e6edf3; --fg-dim: #94a3b8; --fg-dimmer: #64748b;
+    --border: rgba(255,255,255,.08); --border-strong: rgba(255,255,255,.14);
+    --accent: oklch(0.72 0.18 30); --accent-2: oklch(0.78 0.15 50);
+    --accent-soft: rgba(255,138,77,.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 72px 32px 96px; }
+
+  header { margin-bottom: 56px; }
+  .brand-row {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: .18em;
+    color: var(--fg-dim); margin-bottom: 20px;
+  }
+  .brand-row .dot { width: 24px; height: 1px; background: var(--accent); }
+  .brand-row strong { color: var(--accent); font-weight: 600; letter-spacing: .14em; }
+  h1 {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700; letter-spacing: -0.02em; line-height: 1.1;
+    margin-bottom: 18px; text-wrap: balance;
+  }
+  h1 em {
+    font-style: italic; font-weight: 600;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    padding-right: .35em; margin-right: -.1em;
+  }
+  .lead { font-size: 17px; color: var(--fg-dim); max-width: 640px; line-height: 1.65; }
+  .lead strong { color: var(--fg); font-weight: 600; }
+
+  .section-head {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: .14em;
+    color: var(--fg-dim); margin-bottom: 24px;
+  }
+  .section-head .line { flex: 1; height: 1px; background: var(--border); }
+
+  .items { display: flex; flex-direction: column; gap: 14px; margin-bottom: 56px; }
+  a.item {
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding: 22px 24px;
+    background: linear-gradient(180deg, #141414, #0f0f0f);
+    border: 1px solid var(--border); border-radius: 16px;
+    text-decoration: none; color: inherit;
+    transition: border-color .25s, transform .25s, background .25s;
+    position: relative; overflow: hidden;
+  }
+  a.item::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    opacity: 0; transition: opacity .25s;
+  }
+  a.item:hover {
+    border-color: rgba(255,138,77,.3);
+    transform: translateY(-2px);
+    background: linear-gradient(180deg, #161616, #111);
+  }
+  a.item:hover::before { opacity: 1; }
+
+  .item-main { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .item-eyebrow {
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: .12em;
+    color: var(--accent); font-weight: 600;
+  }
+  .item-title { font-size: 18px; font-weight: 600; color: var(--fg); letter-spacing: -0.005em; }
+  .item-desc { font-size: 14px; color: var(--fg-dim); margin-top: 4px; }
+
+  .item-arrow {
+    flex-shrink: 0;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent-soft);
+    border: 1px solid rgba(255,138,77,.25);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    transition: transform .25s;
+  }
+  a.item:hover .item-arrow { transform: translateX(4px); }
+
+  footer {
+    margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border);
+    font-size: 13px; color: var(--fg-dim); line-height: 1.7;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="brand-row">
+      <span>Florea.cz × <strong>ECC Digital</strong></span>
+      <span class="dot"></span>
+      <span>Klientský prostor</span>
+    </div>
+    <h1>Materiály a návrhy <em>pro Floreu</em></h1>
+    <p class="lead">
+      Místo, kam průběžně dáváme <strong>návrhy kreativ, prezentace a studie</strong> ke schválení nebo komentování. Není veřejné, přístup funguje jen pro ty, kdo mají přímý odkaz.
+    </p>
+  </header>
+
+  <div class="section-head">
+    <span>Aktuálně dostupné</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="items">
+
+    <a class="item" href="bannery-2026/">
+      <div class="item-main">
+        <span class="item-eyebrow">Říjen 2026</span>
+        <span class="item-title">HTML5 bannery · 11 návrhů ve 3 sadách</span>
+        <span class="item-desc">Formát 300×600 pro GDN, Sklik a Seznam · hotové k nasazení</span>
+      </div>
+      <div class="item-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    Komentáře, úpravy, schválení pošli na <a href="mailto:admin@eccdigital.cz">admin@eccdigital.cz</a> nebo volej <a href="tel:+420724443968">+420 724 443 968</a>.<br>
+    Prezentace není veřejná · <a href="https://eccdigital.cz">eccdigital.cz</a>
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Florea.cz — HTML5 bannery říjen 2026 · ECC Digital</title>
+<link rel="icon" href="/favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-raised: #141414;
+    --fg: #e6edf3;
+    --fg-dim: #94a3b8;
+    --fg-dimmer: #64748b;
+    --border: rgba(255,255,255,.08);
+    --border-strong: rgba(255,255,255,.14);
+    --accent: oklch(0.72 0.18 30);
+    --accent-2: oklch(0.78 0.15 50);
+    --accent-soft: rgba(255,138,77,.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1480px; margin: 0 auto; padding: 48px 32px 96px; }
+
+  /* ─── Header ─────────────────────────────────────────────────────── */
+  header {
+    position: relative;
+    padding: 32px 36px;
+    border-radius: 24px;
+    background:
+      radial-gradient(ellipse 60% 50% at 100% 0%, rgba(255,138,77,.12), transparent 60%),
+      linear-gradient(180deg, #141414 0%, #0f0f0f 100%);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 56px;
+  }
+  header::before {
+    content: "";
+    position: absolute; top: 0; right: 0;
+    width: 55%; height: 100%;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 60% 60% at 90% 30%, black 5%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 60% at 90% 30%, black 5%, transparent 70%);
+  }
+  .brand-row {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    color: var(--fg-dim);
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .brand-row .dot { width: 24px; height: 1px; background: var(--accent); }
+  .brand-row strong { color: var(--accent); font-weight: 600; letter-spacing: .14em; }
+  h1 {
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    position: relative;
+    text-wrap: balance;
+    max-width: 820px;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 600;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-right: .35em;
+    margin-right: -.1em;
+  }
+  .lead {
+    font-size: 16px;
+    color: var(--fg-dim);
+    max-width: 720px;
+    line-height: 1.65;
+    position: relative;
+  }
+  .lead strong { color: var(--fg); font-weight: 600; }
+
+  .meta-row {
+    display: flex; flex-wrap: wrap; gap: 18px 32px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    position: relative;
+    font-size: 13px;
+    color: var(--fg-dim);
+  }
+  .meta-row > div { display: flex; align-items: center; gap: 8px; }
+  .meta-row span.k { color: var(--fg-dimmer); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+  .meta-row span.v { color: var(--fg); font-weight: 500; }
+
+  /* ─── Sada sections ──────────────────────────────────────────────── */
+  section.sada { margin-bottom: 64px; }
+  .sada-head {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 24px;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--fg-dim);
+  }
+  .sada-head .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(255,138,77,.25);
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .sada-head .title {
+    color: var(--fg);
+    font-family: 'Geist', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+  .sada-head .desc {
+    color: var(--fg-dim);
+    font-family: 'Geist', sans-serif;
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: auto;
+  }
+
+  /* ─── Banner grid ────────────────────────────────────────────────── */
+  .banner-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+    gap: 32px 28px;
+    justify-content: start;
+  }
+
+  figure.banner {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .frame-wrap {
+    position: relative;
+    width: 300px; height: 600px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #0f0f0f;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,.4),
+      0 10px 28px -14px rgba(0,0,0,.6),
+      0 0 0 1px var(--border-strong);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .frame-wrap:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 1px 2px rgba(0,0,0,.4),
+      0 20px 40px -16px rgba(255,138,77,.25),
+      0 20px 40px -20px rgba(0,0,0,.7),
+      0 0 0 1px rgba(255,138,77,.35);
+  }
+  .frame-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  figcaption {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 0 2px;
+    width: 300px;
+  }
+  figcaption .code {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  figcaption .label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg);
+    line-height: 1.3;
+  }
+  figcaption .actions {
+    display: flex; gap: 8px;
+    margin-top: 4px;
+  }
+  figcaption .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 10px;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--border-strong);
+    color: var(--fg-dim);
+    cursor: pointer;
+    transition: all .2s;
+    font-family: inherit;
+  }
+  figcaption .btn:hover {
+    background: rgba(255,138,77,.1);
+    border-color: rgba(255,138,77,.3);
+    color: var(--accent);
+  }
+  figcaption .btn svg { width: 11px; height: 11px; }
+
+  /* ─── Footer ─────────────────────────────────────────────────────── */
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--fg-dim);
+  }
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 24px 16px 64px; }
+    header { padding: 24px; margin-bottom: 40px; }
+    .meta-row { gap: 14px 20px; }
+    section.sada { margin-bottom: 48px; }
+    .sada-head { flex-wrap: wrap; }
+    .sada-head .desc { margin-left: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="brand-row">
+      <span>Florea.cz × <strong>ECC Digital</strong></span>
+      <span class="dot"></span>
+      <span>Prezentace návrhů</span>
+    </div>
+
+    <h1>HTML5 bannery <em>říjen 2026</em></h1>
+    <p class="lead">
+      Jedenáct návrhů ve třech kreativních sadách — formát <strong>300×600</strong>, hotové HTML5 bannery pro Google Display Network, Sklik a Seznam. Každý banner má jiný motiv kompozice a sdělení; sady se odlišují grafickým vedením a tempem animace.
+    </p>
+
+    <div class="meta-row">
+      <div><span class="k">Formát</span> <span class="v">300×600</span></div>
+      <div><span class="k">Počet variant</span> <span class="v">11</span></div>
+      <div><span class="k">Sady</span> <span class="v">3 × A/B/C/D</span></div>
+      <div><span class="k">Click URL</span> <span class="v">florea.cz</span></div>
+      <div><span class="k">Prohlížeč</span> <span class="v">najeď kurzorem na banner, zobrazí se detail stínu</span></div>
+    </div>
+  </header>
+
+  <section class="sada">
+    <div class="sada-head">
+      <span class="num">01</span>
+      <span class="title">Sada 1</span>
+      <span class="desc">První kreativní vedení — čtyři varianty</span>
+    </div>
+    <div class="banner-grid">
+
+      <figure class="banner">
+        <div class="frame-wrap"><iframe src="sada1-1a-100-ruzi-portret/" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption>
+          <span class="code">1a</span>
+          <span class="label">100 růží · Portrét</span>
+          <div class="actions">
+            <a class="btn" href="sada1-1a-100-ruzi-portret/" target="_blank" rel="noopener noreferrer">Otevřít solo ↗</a>
+            <button class="btn" data-reload="sada1-1a-100-ruzi-portret">Přehrát znovu ↻</button>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="banner">
+        <div class="frame-wrap"><iframe src="sada1-1b-100-ruzi-slogan/" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption>
+          <span class="code">1b</span>
+          <span class="label">100 růží · Slogan</span>
+          <div class="actions">
+            <a class="btn" href="sada1-1b-100-ruzi-slogan/" target="_blank" rel="noopener noreferrer">Otevřít solo ↗</a>
+            <button class="btn" data-reload="sada1-1b-100-ruzi-slogan">Přehrát znovu ↻</button>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="banner">
+        <div class="frame-wrap"><iframe src="sada1-1c-tulipany-portret/" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption>
+          <span class="code">1c</span>
+          <span class="label">Tulipány · Portrét</span>
+          <div class="actions">
+            <a class="btn" href="sada1-1c-tulipany-portret/" target="_blank" rel="noopener noreferrer">Otevřít solo ↗</a>
+            <button class="btn" data-reload="sada1-1c-tulipany-portret">Přehrát znovu ↻</button>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="banner">
+        <div class="frame-wrap"><iframe src="sada1-1d-tulipany-slogan/" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption>
+          <span class="code">1d</span>
+          <span class="label">Tulipány · Slogan</span>
+          <div class="actions">
+            <a class="btn" href="sada1-1d-tulipany-slogan/" target="_blank" rel="noopener noreferrer">Otevřít solo ↗</a>
+            <button class="btn" data-reload="sada1-1d-tulipany-slogan">Přehrát znovu ↻</button>
+          </div>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <section class="sada">
+    <div class="sada-head">
+      <span class="num">02</span>
+      <span class="title">Sada 2</span>
+      <span class="desc">Druhé kreativní vedení — čtyři varianty</span>
+    </div>
+    <div class="banner-grid">
+
+      <figure class="banner">
+        <div class="frame-wrap"><iframe src="sada2-2a-100-ruzi-portret/" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption>
+          <span class="code">2a</span>
+          <span class="label">100 růží · Portrét</span>
+          <div class="actions">
+            <a class="btn" href="sada2-2a-100-ruzi-portret/" target="_blank" rel="noopener noreferrer">Otevřít solo ↗</a>
+            <button class="btn" data-reload="sada2-2a-100-ruzi-portret">Přehrát znovu ↻</button>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="banner">
+        <div class="frame-wrap"><iframe src="sada2-2b-100-ruzi-slogan/" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption>
+          <span class="code">2b</span>
+          <span class="label">100 růží · Slogan</span>
+          <div class="actions">
+            <a class="btn" href="sada2-2b-100-ruzi-slogan/" target="_blank" rel="noopener noreferrer">Otevřít solo ↗</a>
+            <button class="btn" data-reload="sada2-2b-100-ruzi-slogan">Přehrát znovu ↻</button>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="banner">
+        <div class="frame-wrap"><iframe src="sada2-2c-tulipany-portret/" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption>
+          <span class="code">2c</span>
+          <span class="label">Tulipány · Portrét</span>
+          <div class="actions">
+            <a class="btn" href="sada2-2c-tulipany-portret/" target="_blank" rel="noopener noreferrer">Otevřít solo ↗</a>
+            <button class="btn" data-reload="sada2-2c-tulipany-portret">Přehrát znovu ↻</button>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="banner">
+        <div class="frame-wrap"><iframe src="sada2-2d-tulipany-slogan/" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption>
+          <span class="code">2d</span>
+          <span class="label">Tulipány · Slogan</span>
+          <div class="actions">
+            <a class="btn" href="sada2-2d-tulipany-slogan/" target="_blank" rel="noopener noreferrer">Otevřít solo ↗</a>
+            <button class="btn" data-reload="sada2-2d-tulipany-slogan">Přehrát znovu ↻</button>
+          </div>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <section class="sada">
+    <div class="sada-head">
+      <span class="num">03</span>
+      <span class="title">Sada 3</span>
+      <span class="desc">Třetí kreativní vedení — tři varianty s produktovou kompozicí</span>
+    </div>
+    <div class="banner-grid">
+
+      <figure class="banner">
+        <div class="frame-wrap"><iframe src="sada3-3a-100-ruzi-saty-portret/" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption>
+          <span class="code">3a</span>
+          <span class="label">100 růží · Šaty · Portrét</span>
+          <div class="actions">
+            <a class="btn" href="sada3-3a-100-ruzi-saty-portret/" target="_blank" rel="noopener noreferrer">Otevřít solo ↗</a>
+            <button class="btn" data-reload="sada3-3a-100-ruzi-saty-portret">Přehrát znovu ↻</button>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="banner">
+        <div class="frame-wrap"><iframe src="sada3-3b-100-ruzi-tricko-slogan/" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption>
+          <span class="code">3b</span>
+          <span class="label">100 růží · Tričko · Slogan</span>
+          <div class="actions">
+            <a class="btn" href="sada3-3b-100-ruzi-tricko-slogan/" target="_blank" rel="noopener noreferrer">Otevřít solo ↗</a>
+            <button class="btn" data-reload="sada3-3b-100-ruzi-tricko-slogan">Přehrát znovu ↻</button>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="banner">
+        <div class="frame-wrap"><iframe src="sada3-3c-100-ruzi-objeti-portret/" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption>
+          <span class="code">3c</span>
+          <span class="label">100 růží · Objetí · Portrét</span>
+          <div class="actions">
+            <a class="btn" href="sada3-3c-100-ruzi-objeti-portret/" target="_blank" rel="noopener noreferrer">Otevřít solo ↗</a>
+            <button class="btn" data-reload="sada3-3c-100-ruzi-objeti-portret">Přehrát znovu ↻</button>
+          </div>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      Připomínky, úpravy nebo schválení pošli na <a href="mailto:admin@eccdigital.cz">admin@eccdigital.cz</a> nebo volej Ing. Petr Štěpán <a href="tel:+420724443968">+420 724 443 968</a>.
+    </div>
+    <div>
+      Prezentace není veřejná · <a href="https://eccdigital.cz">eccdigital.cz</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // "Přehrát znovu" — reload konkrétního iframu podle data-reload atributu
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('button[data-reload]');
+    if (!btn) return;
+    var slug = btn.getAttribute('data-reload');
+    var iframe = document.querySelector('iframe[src^="' + slug + '/"]');
+    if (iframe) {
+      var src = iframe.src;
+      iframe.src = 'about:blank';
+      // Krátká pauza, aby prohlížeč resetoval animace
+      setTimeout(function() { iframe.src = src; }, 50);
+    }
+  });
+</script>
+
+</body>
+</html>

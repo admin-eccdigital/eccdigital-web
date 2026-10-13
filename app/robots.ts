@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         // Klientské prezentace — nesmí do indexu (mají také <meta noindex>)
-        disallow: ["/prezentace-ksp-group/"],
+        disallow: ["/prezentace-ksp-group/", "/florea/"],
       },
     ],
     sitemap: `${SITE}/sitemap.xml`,
