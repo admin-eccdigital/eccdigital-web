@@ -9,9 +9,20 @@ type Project = {
   palette: [string, string]
   image?: string
   url?: string
+  href?: string
 }
 
 const PROJECTS: Project[] = [
+  {
+    name: "Nexus Recovery",
+    tag: "Privátní wellness · Plzeň",
+    desc: "Web, online rezervace, dárkové poukazy a vstup na PIN — zákazník si zónu zarezervuje i otevře sám.",
+    services: ["Web", "Rezervace", "Focení"],
+    palette: ["oklch(0.45 0.08 50)", "oklch(0.65 0.14 45)"],
+    image: "/images/reference/nexus-recovery/web-nexus-recovery-uvodni-stranka.webp",
+    url: "https://nexusrecovery.cz",
+    href: "/reference/nexus-recovery/",
+  },
   {
     name: "Klimahome",
     tag: "Tepelná čerpadla",
@@ -77,8 +88,9 @@ function CaseTile({ p }: { p: Project }) {
         backgroundPosition: "top center",
       }
     : { background: grad }
+  const Tag = p.href ? "a" : "div"
   return (
-    <div className="case-card">
+    <Tag className="case-card" {...(p.href ? { href: p.href } : {})}>
       <div className="case-thumb" style={thumbStyle}>
         {!p.image && <div className="case-thumb-grid" />}
         {!p.image && (
@@ -96,8 +108,9 @@ function CaseTile({ p }: { p: Project }) {
             </span>
           ))}
         </div>
+        {p.href && <span className="case-more">Přečíst případovku →</span>}
       </div>
-    </div>
+    </Tag>
   )
 }
 

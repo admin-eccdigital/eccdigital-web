@@ -12,6 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${SITE}/reference/nexus-recovery/`,
+      lastModified: new Date("2026-10-18"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${SITE}/banner-generator/`,
       lastModified: now,
       changeFrequency: "monthly",
