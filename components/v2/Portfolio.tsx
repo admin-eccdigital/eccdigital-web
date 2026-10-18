@@ -10,6 +10,7 @@ type Project = {
   image?: string
   url?: string
   href?: string
+  featured?: boolean
 }
 
 const PROJECTS: Project[] = [
@@ -22,6 +23,7 @@ const PROJECTS: Project[] = [
     image: "/images/reference/nexus-recovery/web-nexus-recovery-uvodni-stranka.webp",
     url: "https://nexusrecovery.cz",
     href: "/reference/nexus-recovery/",
+    featured: true,
   },
   {
     name: "Klimahome",
@@ -90,7 +92,7 @@ function CaseTile({ p }: { p: Project }) {
     : { background: grad }
   const Tag = p.href ? "a" : "div"
   return (
-    <Tag className="case-card" {...(p.href ? { href: p.href } : {})}>
+    <Tag className={`case-card${p.featured ? " case-card--featured" : ""}`} {...(p.href ? { href: p.href } : {})}>
       <div className="case-thumb" style={thumbStyle}>
         {!p.image && <div className="case-thumb-grid" />}
         {!p.image && (
@@ -98,6 +100,7 @@ function CaseTile({ p }: { p: Project }) {
         )}
       </div>
       <div className="case-body">
+        {p.featured && <span className="case-badge">Nová případovka</span>}
         <div className="case-tag">{p.tag}</div>
         <h3>{p.name}</h3>
         <p>{p.desc}</p>
@@ -134,7 +137,7 @@ export function Portfolio() {
         </Reveal>
         <div className="case-grid">
           {PROJECTS.map((p, i) => (
-            <Reveal key={p.name} delay={i * 60}>
+            <Reveal key={p.name} delay={i * 60} className={p.featured ? "case-cell--featured" : ""}>
               <CaseTile p={p} />
             </Reveal>
           ))}
