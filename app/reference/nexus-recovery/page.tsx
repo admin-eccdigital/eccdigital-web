@@ -10,7 +10,7 @@ const URL = "https://eccdigital.cz/reference/nexus-recovery/"
 const IMG = "/images/reference/nexus-recovery"
 
 export const metadata: Metadata = {
-  title: "Web s online rezervací pro wellness: případovka Nexus Recovery",
+  title: "Web s rezervačním systémem pro wellness: případovka Nexus Recovery",
   description:
     "Jak jsme pro privátní wellness Nexus Recovery v Plzni postavili web, online rezervace, poukazy a vstup na PIN. Zákazník si zónu zarezervuje i otevře sám.",
   alternates: { canonical: URL },
