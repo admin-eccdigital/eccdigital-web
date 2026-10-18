@@ -167,8 +167,8 @@ export default function NexusRecoveryPage() {
               <p>
                 Takový koncept stojí na tom, že funguje sám. Kdyby měl zákazník volat kvůli termínu a pak čekat,
                 až mu někdo odemkne, ztrácí privátní zóna to hlavní. Klient proto potřeboval víc než vizitku. Chtěl
-                kompletní cestu od první návštěvy webu až po dveře. Pro takové projekty spojujeme{" "}
-                <a href="/#sluzby">tvorbu webů a výkonnostní marketing</a> pod jednou střechou.
+                kompletní cestu od první návštěvy webu až po dveře. Přesně to je{" "}
+                <a href="/web-s-rezervacnim-systemem/">web s rezervačním systémem</a>, jak ho stavíme pro provozy, které prodávají čas.
               </p>
 
               <h2>Web, který prodává zážitek</h2>

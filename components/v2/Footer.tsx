@@ -47,6 +47,7 @@ export function Footer() {
             <h4>Tvorba prezentací a obsahu</h4>
             <ul>
               <li><a href="#sluzby">Firemní weby (WordPress, Next.js)</a></li>
+              <li><a href="/web-s-rezervacnim-systemem/">Web s rezervačním systémem</a></li>
               <li><a href="#sluzby">Vícejazyčné weby a landing pages</a></li>
               <li><a href="#sluzby">Marketing pro e-shopy (WooCommerce, Shoptet)</a></li>
               <li><a href="#sluzby">PPC bannery a kreativy</a></li>
