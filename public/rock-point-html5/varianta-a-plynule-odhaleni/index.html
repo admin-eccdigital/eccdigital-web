@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="cs"><head><meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer"><meta charset="utf-8"><meta name="viewport" content="width=300,initial-scale=1"><meta name="ad.size" content="width=300,height=600"><title>Rock Point · Black Friday · Varianta A</title><style>
+<html lang="cs"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=300,initial-scale=1"><meta name="ad.size" content="width=300,height=600"><title>Rock Point · Black Friday · Varianta A</title><style>
 *{box-sizing:border-box}html,body{margin:0;padding:0;width:300px;height:600px;overflow:hidden;background:#000}
 #ad{position:relative;width:300px;height:600px;overflow:hidden;background:#000;isolation:isolate}
 .poster{position:absolute;inset:0;width:300px;height:600px;display:block;border:0}
@@ -33,7 +33,7 @@
   var image=document.querySelector('.poster');
   var reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
   var variant=ad.getAttribute('data-variant');
-  var introEnd=variant==='A'?2210:1680, rest=5000, fade=620;
+  var K=variant==='A'?1.3:1, introEnd=variant==='A'?Math.round(2210*K):1680, rest=5000, fade=620;
   var exitStart=introEnd+rest, period=exitStart+fade+180; // klid 5 s, pak výtlum a nový cyklus
   var handles=[];
   var stable={opacity:1,transform:'none',clipPath:'inset(0% 0% 0% 0%)',filter:'brightness(1)'};
@@ -42,7 +42,7 @@
     var element=document.querySelector(selector);
     if(!element)return;
     var frames=[];
-    intro.forEach(function(f){frames.push(Object.assign(pose(f[1]),{offset:f[0]/period,easing:f[2]||'cubic-bezier(.18,.75,.2,1)'}));});
+    intro.forEach(function(f){frames.push(Object.assign(pose(f[1]),{offset:f[0]*K/period,easing:f[2]||'cubic-bezier(.18,.75,.2,1)'}));});
     (accents||[]).forEach(function(f){frames.push(Object.assign(pose(f[1]),{offset:f[0]/period,easing:f[2]||'ease-in-out'}));});
     frames.push(Object.assign(pose(),{offset:exitStart/period,easing:'ease-in'}));
     frames.push(Object.assign(pose({opacity:0}),{offset:(exitStart+fade)/period,easing:'linear'}));
