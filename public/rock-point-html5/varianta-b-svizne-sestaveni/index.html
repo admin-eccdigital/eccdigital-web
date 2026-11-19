@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="cs"><head><meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer"><meta charset="utf-8"><meta name="viewport" content="width=300,initial-scale=1"><meta name="ad.size" content="width=300,height=600"><title>Rock Point · Black Friday · Varianta B</title><style>
+*{box-sizing:border-box}html,body{margin:0;padding:0;width:300px;height:600px;overflow:hidden;background:#000}
+#ad{position:relative;width:300px;height:600px;overflow:hidden;background:#000;isolation:isolate}
+.poster{position:absolute;inset:0;width:300px;height:600px;display:block;border:0}
+.motion{position:absolute;inset:0;visibility:hidden;pointer-events:none}
+.playing .poster{visibility:hidden}.playing .motion{visibility:visible}
+.scene{position:absolute;top:0;height:600px;overflow:hidden;transform-origin:center center}
+.scene svg{display:block;overflow:hidden}
+.sprite{position:absolute;background-image:url(assets/banner.jpg);background-repeat:no-repeat;background-size:300px 600px;transform-origin:left center}
+.logo{z-index:5}.black,.friday,.category{z-index:3}.lower{z-index:2;transform-origin:center top}.cta{z-index:4}
+.shine{position:absolute;left:27px;top:547px;width:151px;height:28px;overflow:hidden;z-index:6}.shine-sweep{position:absolute;inset:0;opacity:0}
+.shine-sweep::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 12%,rgba(255,255,255,.28) 47%,transparent 80%)}
+@media(prefers-reduced-motion:reduce){.playing .poster{visibility:visible}.playing .motion{visibility:hidden}}
+
+.logo{left:28px;top:40px;width:158px;height:30px;background-position:-28px -40px;}
+.black{left:0px;top:94px;width:252px;height:62px;background-position:-0px -94px;}
+.friday{left:0px;top:161px;width:272px;height:62px;background-position:-0px -161px;}
+.category{left:0px;top:229px;width:194px;height:36px;background-position:-0px -229px;}
+.lower{left:0px;top:431px;width:300px;height:169px;background-position:-0px -431px;}
+.cta{left:27px;top:547px;width:151px;height:28px;background-position:-27px -547px;}</style></head>
+<body><div id="ad" data-variant="B" role="img" aria-label="Rock Point. Black Friday. Oblečení −20 %. Nakupovat.">
+<img class="poster" src="assets/banner.jpg" alt="" width="300" height="600">
+<div class="motion" aria-hidden="true"><div class="scene scene-0" style="left:0px;width:100px"><svg xmlns="http://www.w3.org/2000/svg" width="100" height="600" viewBox="0 0 100 600" aria-hidden="true"><defs><clipPath id="scene-cutout-0" clipPathUnits="userSpaceOnUse"><path d="M0 0H300V600H0Z M28 40h158v30h-158Z M0 94h252v62h-252Z M0 161h272v62h-272Z M0 229h194v36h-194Z M0 431h300v169h-300Z" clip-rule="evenodd"/></clipPath></defs><image href="assets/banner.jpg" x="0" y="0" width="300" height="600" clip-path="url(#scene-cutout-0)"/></svg></div><div class="scene scene-1" style="left:100px;width:100px"><svg xmlns="http://www.w3.org/2000/svg" width="100" height="600" viewBox="100 0 100 600" aria-hidden="true"><defs><clipPath id="scene-cutout-1" clipPathUnits="userSpaceOnUse"><path d="M0 0H300V600H0Z M28 40h158v30h-158Z M0 94h252v62h-252Z M0 161h272v62h-272Z M0 229h194v36h-194Z M0 431h300v169h-300Z" clip-rule="evenodd"/></clipPath></defs><image href="assets/banner.jpg" x="0" y="0" width="300" height="600" clip-path="url(#scene-cutout-1)"/></svg></div><div class="scene scene-2" style="left:200px;width:100px"><svg xmlns="http://www.w3.org/2000/svg" width="100" height="600" viewBox="200 0 100 600" aria-hidden="true"><defs><clipPath id="scene-cutout-2" clipPathUnits="userSpaceOnUse"><path d="M0 0H300V600H0Z M28 40h158v30h-158Z M0 94h252v62h-252Z M0 161h272v62h-272Z M0 229h194v36h-194Z M0 431h300v169h-300Z" clip-rule="evenodd"/></clipPath></defs><image href="assets/banner.jpg" x="0" y="0" width="300" height="600" clip-path="url(#scene-cutout-2)"/></svg></div><div class="sprite logo"></div>
+<div class="sprite black"></div>
+<div class="sprite friday"></div>
+<div class="sprite category"></div>
+<div class="sprite lower"></div>
+<div class="sprite cta"></div><div class="shine"><span class="shine-sweep"></span></div></div></div><script>
+(function(){
+  'use strict';
+  var ad=document.getElementById('ad');
+  var image=document.querySelector('.poster');
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  var variant=ad.getAttribute('data-variant');
+  var period=9000, cycles=3, total=period*cycles;
+  var handles=[];
+  var stable={opacity:1,transform:'none',clipPath:'inset(0% 0% 0% 0%)',filter:'brightness(1)'};
+  function pose(properties){return Object.assign({},stable,properties||{});}
+  function animate(selector, intro, accents){
+    var element=document.querySelector(selector);
+    if(!element)return;
+    var frames=[];
+    for(var cycle=0;cycle<cycles;cycle++){
+      var start=cycle*period;
+      intro.forEach(function(f){frames.push(Object.assign(pose(f[1]),{offset:(start+f[0])/total,easing:f[2]||'cubic-bezier(.18,.75,.2,1)'}));});
+      (accents||[]).forEach(function(f){frames.push(Object.assign(pose(f[1]),{offset:(start+f[0])/total,easing:f[2]||'ease-in-out'}));});
+      frames.push(Object.assign(pose(),{offset:(start+8200)/total,easing:'ease-in'}));
+      if(cycle<cycles-1){
+        frames.push(Object.assign(pose({opacity:0}),{offset:(start+8820)/total,easing:'linear'}));
+        frames.push(Object.assign(pose({opacity:0}),{offset:(start+8999)/total,easing:'linear'}));
+      }else frames.push(Object.assign(pose(),{offset:1}));
+    }
+    handles.push(element.animate(frames,{duration:total,fill:'both',iterations:1}));
+  }
+  function shine(){
+    var frames=[{opacity:0,transform:'translateX(-155px)',offset:0}];
+    [0,9000,18000].forEach(function(base){
+      [[3600,0,-155],[3850,1,-20],[4300,0,155],[6700,0,-155],[6950,.7,-20],[7400,0,155]].forEach(function(f){
+        frames.push({offset:(base+f[0])/total,opacity:f[1],transform:'translateX('+f[2]+'px)'});
+      });
+    });
+    frames.push({opacity:0,transform:'translateX(155px)',offset:1});
+    handles.push(document.querySelector('.shine-sweep').animate(frames,{duration:total,fill:'both'}));
+  }
+  function start(){
+    if(reduced.matches||!Element.prototype.animate)return;
+    if(variant==='A'){
+      animate('.scene',[ [0,{opacity:0,transform:'translateX(16px)'}], [250,{opacity:0,transform:'translateX(16px)'}], [1350,{}] ]);
+      animate('.black',[[0,{opacity:0,transform:'translateX(-260px)'}],[180,{opacity:0,transform:'translateX(-260px)'}],[760,{}]]);
+      animate('.friday',[[0,{opacity:0,transform:'translateX(-280px)'}],[380,{opacity:0,transform:'translateX(-280px)'}],[990,{}]]);
+      animate('.category',[[0,{opacity:0,transform:'translateX(-200px)'}],[730,{opacity:0,transform:'translateX(-200px)'}],[1230,{}]]);
+      animate('.lower',[[0,{opacity:0,transform:'translateY(40px)'}],[820,{opacity:0,transform:'translateY(40px)'}],[1780,{}]]);
+      animate('.cta',[[0,{opacity:0}],[1800,{opacity:0}],[2210,{}]],[[3250,{}],[3500,{filter:'brightness(1.16)'}],[3850,{}],[6150,{}],[6400,{filter:'brightness(1.12)'}],[6800,{}]]);
+    }else{
+      [0,1,2].forEach(function(i){animate('.scene-'+i,[[0,{opacity:0,transform:'translateY(70px)'}],[100+i*140,{opacity:0,transform:'translateY(70px)'}],[880+i*140,{}]]);});
+      animate('.black',[[0,{opacity:0,clipPath:'inset(0% 100% 0% 0%)'}],[120,{opacity:0,clipPath:'inset(0% 100% 0% 0%)'}],[500,{}]]);
+      animate('.friday',[[0,{opacity:0,clipPath:'inset(0% 0% 0% 100%)'}],[330,{opacity:0,clipPath:'inset(0% 0% 0% 100%)'}],[740,{}]]);
+      animate('.category',[[0,{opacity:0,transform:'translateX(-40px)'}],[620,{opacity:0,transform:'translateX(-40px)'}],[980,{}]]);
+      animate('.lower',[[0,{opacity:0,transform:'translateY(35px)'}],[510,{opacity:0,transform:'translateY(35px)'}],[1190,{}]]);
+      animate('.cta',[[0,{opacity:0}],[1290,{opacity:0}],[1680,{}]]);
+      shine();
+    }
+    ad.classList.add('playing');
+    // All motion stops after 3 × 9 s on the unchanged original artwork.
+    // Sklik inserts the click-through. No URL or JavaScript click handler is embedded.
+    handles[0].finished.then(function(){ad.classList.remove('playing');}).catch(function(){});
+  }
+  function ready(){if(image.naturalWidth)start();}
+  if(image.complete)ready();else image.addEventListener('load',ready,{once:true});
+  reduced.addEventListener('change',function(event){if(event.matches){handles.forEach(function(a){a.cancel();});ad.classList.remove('playing');}});
+})();
+</script></body></html>
