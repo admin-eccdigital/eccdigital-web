@@ -12,7 +12,7 @@ html,body{margin:0;padding:0;background:#000;width:300px;height:600px;overflow:h
 <body>
 <a id="b" href="#" aria-label="Rock Point Black Friday −22 % na vše">
 <img class="photo" src="assets/bg.jpg" alt="" width="300" height="600">
-<img class="l logo" src="assets/logo.webp" alt="" style="left:26px;top:30px;width:190px;height:27px"><img class="l black" src="assets/black.webp" alt="" style="left:0px;top:70px;width:236px;height:56px"><img class="l friday" src="assets/friday.webp" alt="" style="left:0px;top:130px;width:262px;height:56px"><img class="l tag" src="assets/tag.webp" alt="" style="left:0px;top:192px;width:176px;height:30px"><img class="l temer" src="assets/temer.webp" alt="" style="left:26px;top:438px;width:82px;height:24px"><img class="l sleva" src="assets/sleva.webp" alt="" style="left:20px;top:458px;width:212px;height:108px"><img class="l cta" src="assets/cta.webp" alt="" style="left:26px;top:560px;width:140px;height:28px">
+<img class="l logo" src="assets/logo.webp" alt="" style="left:26px;top:30px;width:190px;height:27px"><img class="l black" src="assets/black.webp" alt="" style="left:0px;top:70px;width:236px;height:56px"><img class="l friday" src="assets/friday.webp" alt="" style="left:0px;top:130px;width:262px;height:56px"><img class="l temer" src="assets/temer.webp" alt="" style="left:26px;top:512px;width:152px;height:22px"><img class="l sleva" src="assets/sleva.webp" alt="" style="left:20px;top:404px;width:212px;height:108px"><img class="l cta" src="assets/cta.webp" alt="" style="left:26px;top:550px;width:140px;height:28px">
 </a>
 <script>
 (function(){
@@ -26,6 +26,7 @@ var cfg={
  D:{intro:1900,rest:5000,fade:600,t:{photo:[0,1300],logo:[100,500],black:[200,550],friday:[350,550],tag:[550,450],temer:[900,400],sleva:[950,550],cta:[1300,500]}},
  E:{intro:2700,rest:5000,fade:700,t:{photo:[0,2700],logo:[1500,700],black:[1000,800],friday:[1250,800],tag:[1650,600],temer:[1900,500],sleva:[1800,800],cta:[2200,600]}}
 }[V];
+if(V==='C'){var K=1.15;cfg.intro=Math.round(cfg.intro*K);Object.keys(cfg.t).forEach(function(n){cfg.t[n]=[Math.round(cfg.t[n][0]*K),Math.round(cfg.t[n][1]*K)]});}
 var exitStart=cfg.intro+cfg.rest,period=exitStart+cfg.fade+250;
 var from={ // start pose per layer and variant
  C:{photo:{opacity:0,transform:'scale(1.12)'},logo:{opacity:0},black:{opacity:0,clipPath:'inset(0 100% 0 0)'},friday:{opacity:0,clipPath:'inset(0 100% 0 0)'},tag:{opacity:0,clipPath:'inset(0 100% 0 0)'},temer:{opacity:0,transform:'translateY(8px)'},sleva:{opacity:0,transform:'translateY(14px)'},cta:{opacity:0,transform:'translateY(10px)'}},
@@ -49,7 +50,7 @@ function pose(o){return Object.assign({opacity:1,transform:'none',clipPath:'inse
  el.animate(frames,{duration:period,fill:'both',iterations:Infinity});
 });
 if(V==='D'){ // lesk na tlacitku
- var shine=document.createElement('div');shine.style.cssText='position:absolute;left:26px;top:560px;width:140px;height:28px;overflow:hidden;pointer-events:none';
+ var shine=document.createElement('div');shine.style.cssText='position:absolute;left:26px;top:550px;width:140px;height:28px;overflow:hidden;pointer-events:none';
  var sw=document.createElement('div');sw.style.cssText='position:absolute;inset:0;opacity:0;background:linear-gradient(110deg,transparent 12%,rgba(255,255,255,.55) 47%,transparent 80%)';
  shine.appendChild(sw);q('#b').appendChild(shine);
  sw.animate([{transform:'translateX(-100%)',opacity:0,offset:0},{transform:'translateX(-100%)',opacity:0,offset:(cfg.intro+300)/period},{transform:'translateX(0)',opacity:1,offset:(cfg.intro+550)/period},{transform:'translateX(100%)',opacity:0,offset:(cfg.intro+1100)/period},{transform:'translateX(100%)',opacity:0,offset:1}],{duration:period,iterations:Infinity});
